@@ -21,6 +21,9 @@ app.use((req, res, next) => {
 	next();
 });
 
+const loginAndToken = require("./api/login");
+app.use("/api/login", loginAndToken);
+
 const userManagement = require("./api/users");
 app.use("/api/users", userManagement);
 
