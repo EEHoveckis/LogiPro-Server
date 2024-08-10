@@ -1,6 +1,6 @@
 {
 	"name": "logipro",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "LogiPro",
 	"main": "index.js",
 	"scripts": {
