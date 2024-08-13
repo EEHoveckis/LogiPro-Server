@@ -21,8 +21,11 @@ app.use((req, res, next) => {
 	next();
 });
 
-const loginAndToken = require("./api/login");
-app.use("/api/login", loginAndToken);
+const loginPath = require("./api/login");
+app.use("/api/login", loginPath);
+
+const logoutPath = require("./api/logout");
+app.use("/api/logout", logoutPath);
 
 const userManagement = require("./api/users");
 app.use("/api/users", userManagement);

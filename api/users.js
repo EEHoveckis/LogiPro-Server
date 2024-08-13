@@ -9,21 +9,20 @@ router.get("/", (req, res) => {
 	if (!existsSync(`${process.cwd()}/data/users/${req.headers.username}.json`)) return res.status(401).send("401 - Incorrect Username");
 
 	try {
-		const loginData = require(`../data/users/${req.headers.username}.json`);
-		if (loginData.group != "ADMIN") return res.status(403).send("403 - Not Authorized To View Content");
-		if (loginData.tempToken != req.headers.temptoken) return res.status(403).send("403 - Unknown Temporary Token");
-		if (Date.now() > loginData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired");
+		const userData = require(`../data/users/${req.headers.username}.json`);
+		if (userData.group != "ADMIN") return res.status(403).send("403 - Not Authorized To View Content");
+		if (userData.tempToken != req.headers.temptoken) return res.status(403).send("403 - Unknown Temporary Token");
+		if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired");
 
-		const userData = require(`${process.cwd()}/data/users/${req.query.username}.json`);
+		const returnData = require(`${process.cwd()}/data/users/${req.query.username}.json`);
 		res.format({
 			"application/json": () => {
-				res.status(200).json(userData);
+				res.status(200).json(returnData);
 			}
 		});
 
 	} catch (err) {
-		console.log(err)
-		res.status(500).send("500 - Something went wrong, sorry for that. :(");
+		return res.status(500).send("500 - Something went wrong, sorry for that. :(");
 	}
 });
 
@@ -33,10 +32,10 @@ router.post("/", (req, res) => {
 	if (!existsSync(`${process.cwd()}/data/users/${req.headers.username}.json`)) return res.status(401).send("401 - Incorrect Username");
 
 	try {
-		const loginData = require(`../data/users/${req.headers.username}.json`);
-		if (loginData.group != "ADMIN") return res.status(403).send("403 - Not Authorized To Post Content");
-		if (loginData.tempToken != req.headers.temptoken) return res.status(403).send("403 - Unknown Temporary Token");
-		if (Date.now() > loginData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired");
+		const userData = require(`../data/users/${req.headers.username}.json`);
+		if (userData.group != "ADMIN") return res.status(403).send("403 - Not Authorized To Post Content");
+		if (userData.tempToken != req.headers.temptoken) return res.status(403).send("403 - Unknown Temporary Token");
+		if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired");
 
 		if (existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("500 - User Already Exists");
 
@@ -60,8 +59,7 @@ router.post("/", (req, res) => {
 			}
 		});
 	} catch (err) {
-		console.log(err)
-		res.status(500).send("500 - Something went wrong, sorry for that. :(");
+		return res.status(500).send("500 - Something went wrong, sorry for that. :(");
 	}
 });
 
