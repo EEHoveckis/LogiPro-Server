@@ -1,11 +1,11 @@
 {
 	"username": "exampleUser",
-	"firstName": "Exampleman",
+	"firstName": "Exampler",
 	"lastName": "Examplist",
 	"password": "809ac9066610e04d171de7666d54872020ec60c5ce670bceb78421e50fab34bf58b1db20a7a93abfd575684778870d26168289d281aadfefbf73c1e407c5445c",
 	"uniqueSalt": "329o4uhgw23klurbwrklehj",
-	"tempToken": "558dd79160f0cf64",
-	"tokenValidTill": "17232900000",
 	"group": "ADMIN",
-	"lastLogin": "1723296207711"
+	"tempToken": "a1f468947a27503b",
+	"tokenValidTill": "1723566506793",
+	"lastLogin": "1723562906793"
 }

@@ -1,0 +1,11 @@
+{
+	"username": "johnnyBravo",
+	"firstName": "Johny",
+	"lastName": "Bravo",
+	"password": "ea9d675e3dc32894e23322f19ae6ffcc99eef2757b7832ef9a0014741ed1639c52a5fbbc2d5b39b6e1d0ae249b4081a959f4cb7ac2dbe951c43946cb74a34932",
+	"uniqueSalt": "b4366a7ee274849bb554da5a942afbf4",
+	"group": "USER",
+	"tempToken": "2247150cb7e2312f",
+	"tokenValidTill": "1723566951208",
+	"lastLogin": "1723563351208"
+}
