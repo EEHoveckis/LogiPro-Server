@@ -1,13 +1,12 @@
-const { writeFileSync } = require("fs");
+const { writeFileSync, existsSync } = require("fs");
 const { scryptSync, randomBytes } = require('crypto');
 const colors = require("colors");
 const prompt = require("prompt");
 const package = require("./package.json");
-const options = require("./data/options.json");
 
 console.log(`LogiPro Server ${package.version}\nStarting Setup...\n`);
 
-if (options.setupFinished == true) {
+if (existsSync(`${process.cwd()}/data/options.json`)) {
 	return console.log("ERROR! Setup Already Finished!".red.bold);
 } else {
 	prompt.message = "";
@@ -23,7 +22,7 @@ if (options.setupFinished == true) {
 			},
 			databaseType: {
 				description: "Server Database Type. (MONGO / LOCAL):".cyan,
-				pattern: /^MONGO$|^mongo$|^LOCAL$|^local$/,
+				pattern: /^MONGO$|^LOCAL$/,
 				message: "Database Type Must Be Either MONGO Or LOCAL!".yellow,
 				required: false
 			},
@@ -57,9 +56,10 @@ if (options.setupFinished == true) {
 	prompt.start();
 
 	prompt.get(schema, function(err, result) {
-		options.port = result.port;
-		options.databaseType = result.databaseType;
-		options.setupFinished = true;
+		let options = {
+			port: result.port,
+			databaseType: result.databaseType
+		}
 		writeFileSync(`./data/options.json`, JSON.stringify(options));
 
 		let uniqueSalt = randomBytes(16).toString("hex");

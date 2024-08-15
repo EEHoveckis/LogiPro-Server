@@ -5,9 +5,9 @@
 	"password": "809ac9066610e04d171de7666d54872020ec60c5ce670bceb78421e50fab34bf58b1db20a7a93abfd575684778870d26168289d281aadfefbf73c1e407c5445c",
 	"uniqueSalt": "329o4uhgw23klurbwrklehj",
 	"group": "ADMIN",
-	"online": true,
+	"online": false,
 	"tempToken": "c5bccf8b19521c41",
-	"tokenValidTill": "1723726459865",
-	"lastLogin": "1723722859865",
+	"tokenValidTill": "",
+	"lastLogin": "",
 	"status": "OK"
 }

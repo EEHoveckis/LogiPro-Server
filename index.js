@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const colors = require("colors");
 const options = require("./data/options.json");
 
 const app = express();
@@ -36,4 +37,4 @@ app.all("*", (req, res) => {
 	res.status(404).send("404 - Not Found");
 });
 
-app.listen(PORT, () => console.log(`Listening On Port ${PORT}`));
+app.listen(PORT, () => console.log(`Listening On Port ${PORT}`.green));
