@@ -97,10 +97,12 @@ router.post("/", (req, res) => {
 			lastName: req.query.newlastname,
 			password: scryptSync(req.query.newpassword, uniqueSalt, 64).toString("hex"),
 			uniqueSalt: uniqueSalt,
+			online: false,
 			group: req.query.newgroup,
 			tempToken: "",
 			tokenValidTill: "",
-			lastLogin: ""
+			lastLogin: "",
+			status: "OK"
 		}
 
 		writeFileSync(`${process.cwd()}/data/users/${req.query.newusername}.json`, JSON.stringify(userObject));
@@ -114,5 +116,29 @@ router.post("/", (req, res) => {
 	}
 });
 
+router.delete("/", (req, res) => {
+	// These shouldn't happen in client app, but they are here just in case.
+	if (req.headers.username == undefined || req.headers.temptoken == undefined) return res.status(401).send("401 - Missing Authentification Parameters");
+	if (!existsSync(`${process.cwd()}/data/users/${req.headers.username}.json`)) return res.status(401).send("401 - Incorrect Username");
+
+	try {
+		const userData = require(`../data/users/${req.headers.username}.json`);
+		if (userData.group != "ADMIN") return res.status(403).send("403 - Not Authorized To Post Content");
+		if (userData.tempToken != req.headers.temptoken) return res.status(403).send("403 - Unknown Temporary Token");
+		if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired");
+
+		if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("500 - User Does Not Exist");
+		if (req.query.username == req.headers.username) return res.status(500).send("500 - Cannot Delete Yourself!");
+
+		const userObject = require(`${process.cwd()}/data/users/${req.query.username}.json`);
+		userObject.status = "DELETED";
+
+		writeFileSync(`${process.cwd()}/data/users/${req.query.username}.json`, JSON.stringify(userObject));
+		return res.status(200).send("200 - User Deleted");
+	} catch (err) {
+		console.log(err);
+		return res.status(500).send("500 - Something went wrong, sorry for that. :(");
+	}
+});
 
 module.exports = router;

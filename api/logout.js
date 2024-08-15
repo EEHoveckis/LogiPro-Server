@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
 		const userData = require(`../data/users/${req.headers.username}.json`);
 		if (userData.tempToken != req.headers.temptoken) return res.status(403).send("403 - Unknown Temporary Token");
 
+		userData.online = false;
 		userData.tempToken = "";
 		userData.tokenValidTill = "";
 		userData.lastLogin = `${Date.now()}`;

@@ -10,7 +10,9 @@ router.get("/", (req, res) => {
 	const userData = require(`../data/users/${req.headers.username}.json`);
 	const receivedKey = scryptSync(req.headers.password, userData.uniqueSalt, 64).toString("hex");
 	if (userData.password != receivedKey) return res.status(403).send("401 - Incorrect Password");
+	if (userData.status == "DELETED") return res.status(403).send("403 - This Account Is Deleted");
 
+	userData.online = true;
 	userData.tempToken = randomBytes(8).toString("hex");
 	userData.tokenValidTill = `${Date.now() + 1 * 60 * 60 * 1000}`;
 	userData.lastLogin = `${Date.now()}`;
