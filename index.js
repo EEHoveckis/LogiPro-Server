@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const options = require("./data/options.json");
 
 const app = express();
-const PORT = process.env.port || 3000;
+const PORT = options.port || 3000;
 
 app.use(cors());
 
