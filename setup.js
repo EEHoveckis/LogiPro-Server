@@ -1,4 +1,4 @@
-const { writeFileSync, existsSync } = require("fs");
+const { writeFileSync, mkdirSync, existsSync } = require("fs");
 const { scryptSync, randomBytes } = require('crypto');
 const colors = require("colors");
 const prompt = require("prompt");
@@ -60,7 +60,9 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 			port: result.port,
 			databaseType: result.databaseType
 		}
-		writeFileSync(`./data/options.json`, JSON.stringify(options));
+		mkdirSync("./data");
+		mkdirSync("./data/users");
+		writeFileSync("./data/options.json", JSON.stringify(options));
 
 		let uniqueSalt = randomBytes(16).toString("hex");
 		let userObject = {

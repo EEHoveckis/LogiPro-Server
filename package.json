@@ -1,7 +1,7 @@
 {
 	"name": "logipro-server",
-	"version": "0.0.10",
-	"description": "RESTful API Server for LogiPro Client",
+	"version": "0.0.11",
+	"description": "RESTful API Server for LogiPro",
 	"main": "index.js",
 	"scripts": {
 		"start": "node index.js",
