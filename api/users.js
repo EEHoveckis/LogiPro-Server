@@ -102,6 +102,7 @@ router.post("/", (req, res) => {
 			tempToken: "",
 			tokenValidTill: "",
 			lastLogin: "",
+			loginHistory: [],
 			status: "OK"
 		}
 

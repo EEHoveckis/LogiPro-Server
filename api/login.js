@@ -1,28 +1,25 @@
-const { scryptSync, randomBytes } = require('crypto');
-const { existsSync, writeFileSync } = require("fs");
 const express = require('express');
 const router = express.Router();
+const auth = require("./auth.js");
+
+const { randomBytes } = require('crypto');
+const { writeFileSync } = require("fs");
 
 router.get("/", (req, res) => {
-	if (req.headers.username == undefined || req.headers.password == undefined) return res.status(401).send("401 - Missing Authentification Parameters");
-	if (!existsSync(`${process.cwd()}/data/users/${req.headers.username}.json`)) return res.status(401).send("401 - Incorrect Username");
+	const authReturn = auth(req);
+	if (authReturn == 200) {
+		const authData = require(`../data/users/${req.headers.username}.json`);
+		authData.online = true;
+		authData.tempToken = randomBytes(8).toString("hex");
+		authData.tokenValidTill = `${Date.now() + 1 * 60 * 60 * 1000}`;
+		authData.lastLogin = `${Date.now()}`;
+		authData.loginHistory.push(Date.now());
 
-	const userData = require(`../data/users/${req.headers.username}.json`);
-	const receivedKey = scryptSync(req.headers.password, userData.uniqueSalt, 64).toString("hex");
-	if (userData.password != receivedKey) return res.status(403).send("401 - Incorrect Password");
-	if (userData.status == "DELETED") return res.status(403).send("403 - This Account Is Deleted");
-
-	userData.online = true;
-	userData.tempToken = randomBytes(8).toString("hex");
-	userData.tokenValidTill = `${Date.now() + 1 * 60 * 60 * 1000}`;
-	userData.lastLogin = `${Date.now()}`;
-	writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(userData));
-
-	res.format({
-		"application/json": () => {
-			res.status(200).json(userData);
-		}
-	});
+		writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(authData));
+		res.status(200).json(authData);
+	} else {
+		res.status(authReturn[0]).send(authReturn[1]);
+	}
 });
 
 module.exports = router;

@@ -29,13 +29,13 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 			firstName: {
 				description: "Enter Your First Name:".cyan,
 				pattern: /^[a-zA-Z\-\s]+$/,
-				message: "Name Can Only Be Letters Or Dashes!".yellow,
+				message: "Name Can Only Be Letters, Spaces Or Dashes!".yellow,
 				required: true
 			},
 			lastName: {
 				description: "Enter Your Surname:".cyan,
-				pattern: /^[a-zA-Z\-]+$/,
-				message: "Surname Can Only Be Letters Or Dashes!".yellow,
+				pattern: /^[a-zA-Z\-\s]+$/,
+				message: "Surname Can Only Be Letters, Spaces Or Dashes!".yellow,
 				required: true
 			},
 			username: {
@@ -76,9 +76,10 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 			tempToken: "",
 			tokenValidTill: "",
 			lastLogin: "",
+			loginHistory: [],
 			status: "OK"
 		}
 		writeFileSync(`./data/users/${userObject.username}.json`, JSON.stringify(userObject));
-		console.log("Setup Finished! You Can Run \"npm run start\" Now!".green);
+		console.log("Setup Finished! You Can Run \"npm run start\" Now!".green.bold);
 	});
 }
