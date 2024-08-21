@@ -17,6 +17,7 @@ module.exports = function(req) {
 	} else if (req.path == "/api/users") {
 		if (req.headers.username == undefined || req.headers.temptoken == undefined) return [401, "401 - Missing Authentification Parameters!"];
 		if (loginData.tempToken != req.headers.temptoken) return [403, "403 - Incorrect Temporary Token!"];
+		if (loginData.group != "ADMIN") return [403, "Not Authorized To View Content"];
 	}
 
 	return 200;
