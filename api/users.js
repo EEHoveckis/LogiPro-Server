@@ -5,7 +5,6 @@ const router = express.Router();
 const auth = require("./auth.js");
 
 router.get("/", (req, res) => {
-	//if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired"); // later...
 	if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("User Does Not Exist!");
 	try {
 		const authReturn = auth(req);
@@ -23,8 +22,6 @@ router.get("/", (req, res) => {
 });
 
 router.put("/", (req, res) => {
-	//if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired"); // later...
-
 	try {
 		const authReturn = auth(req);
 		if (authReturn == 200) {
@@ -65,8 +62,6 @@ router.put("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-	//if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired"); // later...
-
 	try {
 		const authReturn = auth(req);
 		if (authReturn == 200) {
@@ -99,8 +94,6 @@ router.post("/", (req, res) => {
 });
 
 router.delete("/", (req, res) => {
-	//if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired"); // later...
-
 	try {
 		const authReturn = auth(req);
 		if (authReturn == 200) {

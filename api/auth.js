@@ -15,10 +15,12 @@ module.exports = function(req) {
 	} else if (req.baseUrl == "/api/logout") {
 		if (req.headers.username == undefined || req.headers.temptoken == undefined) return [401, "401 - Missing Authentification Parameters!"];
 		if (loginData.tempToken != req.headers.temptoken) return [403, "403 - Incorrect Temporary Token!"];
+		if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired");
 		renewToken(req);
 	} else if (req.baseUrl == "/api/users") {
 		if (req.headers.username == undefined || req.headers.temptoken == undefined) return [401, "401 - Missing Authentification Parameters!"];
 		if (loginData.tempToken != req.headers.temptoken) return [403, "403 - Incorrect Temporary Token!"];
+		if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired");
 		if (loginData.group != "ADMIN") return [403, "Not Authorized To View Content"];
 		renewToken(req);
 	}
