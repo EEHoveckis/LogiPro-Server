@@ -6,9 +6,10 @@ const auth = require("./auth.js");
 
 router.get("/", (req, res) => {
 	//if (Date.now() > userData.tokenValidTill) return res.status(403).send("403 - Temporary Token Expired"); // later...
-
+	if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("User Does Not Exist!");
 	try {
 		const authReturn = auth(req);
+		console.log(req.baseUrl)
 		if (authReturn == 200) {
 			const returnData = require(`${process.cwd()}/data/users/${req.query.username}.json`);
 			res.status(200).json(returnData);
@@ -16,6 +17,7 @@ router.get("/", (req, res) => {
 			res.status(authReturn[0]).send(authReturn[1]);
 		}
 	} catch (err) {
+		console.log(err)
 		return res.status(500).send("500 - Something went wrong, sorry for that. :(");
 	}
 });
