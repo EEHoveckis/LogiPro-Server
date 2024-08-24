@@ -1,5 +1,4 @@
-const express = require('express');
-const router = express.Router();
+const router = require('express').Router();
 const auth = require("./helperFuncs/authentification/auth.js");
 
 const { randomBytes } = require('crypto');

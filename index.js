@@ -37,4 +37,4 @@ app.all("*", (req, res) => {
 	res.status(404).send("404 - Not Found");
 });
 
-app.listen(PORT, () => console.log(`Listening On Port ${PORT}`.green));
+app.listen(PORT, () => console.log(`Listening On Port ${PORT}`.green.bold));
