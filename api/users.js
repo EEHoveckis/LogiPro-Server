@@ -75,6 +75,7 @@ router.post("/", (req, res) => {
 				lastName: req.query.newlastname,
 				password: scryptSync(req.query.newpassword, uniqueSalt, 64).toString("hex"),
 				uniqueSalt: uniqueSalt,
+				wrongPassword: 0,
 				online: false,
 				group: req.query.newgroup,
 				tempToken: "",
