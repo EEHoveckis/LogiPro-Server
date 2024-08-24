@@ -21,9 +21,9 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 				required: false
 			},
 			databaseType: {
-				description: "Server Database Type. (MONGO / LOCAL):".cyan,
-				pattern: /^MONGO$|^LOCAL$/,
-				message: "Database Type Must Be Either MONGO Or LOCAL!".yellow,
+				description: "Server Database Type. (CLOUD / LOCAL):".cyan,
+				pattern: /^CLOUD$|^LOCAL$/,
+				message: "Database Type Must Be Either CLOUD Or LOCAL!".yellow,
 				required: false
 			},
 			firstName: {

@@ -1,6 +1,6 @@
 const { scryptSync, randomBytes } = require('crypto');
 const { existsSync, writeFileSync } = require("fs");
-const renewToken = require("./renewToken.js");
+const renewToken = require("./helperFuncs/authentification/renewToken.js");
 
 module.exports = function(req) {
 	if (!existsSync(`${process.cwd()}/data/users/${req.headers.username}.json`)) return [401, "401 - Incorrect Username!"];

@@ -2,7 +2,7 @@ const { scryptSync, randomBytes } = require('crypto');
 const { existsSync, writeFileSync, rename } = require("fs");
 const express = require('express');
 const router = express.Router();
-const auth = require("./auth.js");
+const auth = require("./helperFuncs/authentification/auth.js");
 
 router.get("/", (req, res) => {
 	if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("User Does Not Exist!");
