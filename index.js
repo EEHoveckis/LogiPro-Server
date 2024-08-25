@@ -1,9 +1,8 @@
-const express = require("express");
+const app = require("express")();
 const cors = require("cors");
 const colors = require("colors");
 const options = require("./data/options.json");
 
-const app = express();
 const PORT = options.port || 3000;
 
 app.use(cors());
@@ -15,22 +14,12 @@ app.options("*", (req, res, next) => {
 	res.send(200);
 });
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
 app.use((req, res, next) => {
 	console.log(`${req.method} ${req.path} - ${req.ip}`);
 	next();
 });
 
-const loginPath = require("./api/login");
-app.use("/api/login", loginPath);
-
-const logoutPath = require("./api/logout");
-app.use("/api/logout", logoutPath);
-
-const userManagement = require("./api/users");
-app.use("/api/users", userManagement);
+require("./router.js")(app);
 
 // Catch All Route
 app.all("*", (req, res) => {

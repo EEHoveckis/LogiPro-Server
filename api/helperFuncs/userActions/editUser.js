@@ -21,12 +21,7 @@ module.exports = function(req) {
 	}
 
 	if (req.query.username != req.query.newusername && req.query.newusername != undefined) {
-		rename(`${process.cwd()}/data/users/${req.query.username}.json`, `${process.cwd()}/data/users/${req.query.newusername}.json`, (err) => {
-			if (err) {
-				console.log(err);
-				return res.status(500).send("ERROR RENAMING USER");
-			}
-		});
+		rename(`${process.cwd()}/data/users/${req.query.username}.json`, `${process.cwd()}/data/users/${req.query.newusername}.json`);
 		writeFileSync(`${process.cwd()}/data/users/${req.query.newusername}.json`, JSON.stringify(newUserObject));
 		return newUserObject;
 	} else {

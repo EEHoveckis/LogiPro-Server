@@ -1,12 +1,12 @@
 const { existsSync, writeFileSync } = require("fs");
 const router = require('express').Router();
-const auth = require("./helperFuncs/authentification/auth.js");
+const auth = require("../helperFuncs/authentification/auth.js");
 
 router.get("/", (req, res) => {
 	const authReturn = auth(req);
 	if (authReturn == 200) {
 		try {
-			const authData = require(`../data/users/${req.headers.username}.json`);
+			const authData = require(`${process.cwd()}/data/users/${req.headers.username}.json`);
 			authData.online = false;
 			authData.tempToken = "";
 			authData.tokenValidTill = "";

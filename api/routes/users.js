@@ -1,9 +1,9 @@
 const { existsSync } = require("fs");
 const router = require('express').Router();
-const auth = require("./helperFuncs/authentification/auth.js");
-const newUser = require("./helperFuncs/userActions/newUser.js");
-const editUser = require("./helperFuncs/userActions/editUser.js");
-const deleteUser = require("./helperFuncs/userActions/deleteUser.js");
+const auth = require("../helperFuncs/authentification/auth.js");
+const newUser = require("../helperFuncs/userActions/newUser.js");
+const editUser = require("../helperFuncs/userActions/editUser.js");
+const deleteUser = require("../helperFuncs/userActions/deleteUser.js");
 
 router.get("/", (req, res) => {
 	if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("User Does Not Exist!");

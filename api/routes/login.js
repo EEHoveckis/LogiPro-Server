@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const auth = require("./helperFuncs/authentification/auth.js");
+const auth = require("../helperFuncs/authentification/auth.js");
 
 const { randomBytes } = require('crypto');
 const { writeFileSync } = require("fs");
@@ -7,7 +7,7 @@ const { writeFileSync } = require("fs");
 router.get("/", (req, res) => {
 	const authReturn = auth(req);
 	if (authReturn == 200) {
-		const authData = require(`../data/users/${req.headers.username}.json`);
+		const authData = require(`${process.cwd()}/data/users/${req.headers.username}.json`);
 		authData.online = true;
 		authData.tempToken = randomBytes(8).toString("hex");
 		authData.tokenValidTill = `${Date.now() + 1 * 60 * 60 * 1000}`;

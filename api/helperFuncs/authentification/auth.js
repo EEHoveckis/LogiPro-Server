@@ -22,8 +22,6 @@ module.exports = function(req) {
 				writeFileSync(`./data/users/${req.headers.username}.json`, JSON.stringify(loginData));
 				return [403, "403 - Incorrect Password! Your Account Has Been Blocked! Contact Administrator!"];
 			}
-			return [403, "403 - Incorrect Password!"];
-			writeFileSync(`./data/users/${userObject.username}.json`, JSON.stringify(userObject));
 		}
 	} else if (req.baseUrl == "/api/logout") { // Logout
 		if (req.headers.username == undefined || req.headers.temptoken == undefined) return [401, "401 - Missing Authentification Parameters!"]; // Missing Parameters
