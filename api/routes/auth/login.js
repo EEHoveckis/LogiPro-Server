@@ -2,7 +2,7 @@ const router = require('express').Router();
 const auth = require("../../helperFuncs/authentification/auth.js");
 
 const { randomBytes } = require('crypto');
-const { writeFileSync } = require("fs");
+const { existsSync, writeFileSync } = require("fs");
 
 router.get("/", (req, res) => {
 	const authReturn = auth(req);
@@ -15,9 +15,24 @@ router.get("/", (req, res) => {
 		authData.loginHistory.push(Date.now());
 
 		writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(authData));
-		res.status(200).json(authData);
+
+		if (existsSync(`${process.cwd()}/data/logs/${req.headers.username}.json`)) {
+			const userLogs = require(`${process.cwd()}/data/logs/${req.headers.username}.json`);
+			Object.assign(userLogs, {
+				[Date.now()]: "Logged In!"
+			});
+
+			writeFileSync(`${process.cwd()}/data/logs/${req.headers.username}.json`, JSON.stringify(userLogs));
+		} else {
+			const userLogs = {
+				[Date.now()]: "Logged In!"
+			};
+			writeFileSync(`${process.cwd()}/data/logs/${req.headers.username}.json`, JSON.stringify(userLogs));
+		}
+
+		return res.status(200).json(authData);
 	} else {
-		res.status(authReturn[0]).send(authReturn[1]);
+		return res.status(authReturn[0]).send(authReturn[1]);
 	}
 });
 
