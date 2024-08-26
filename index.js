@@ -1,11 +1,8 @@
 const app = require("express")();
-const cors = require("cors");
 const colors = require("colors");
-const options = require("./data/options.json");
+const PORT = require("./data/options.json").port;
 
-const PORT = options.port || 3000;
-
-app.use(cors());
+app.use(require("cors")());
 
 app.options("*", (req, res, next) => {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -19,9 +16,8 @@ app.use((req, res, next) => {
 	next();
 });
 
-require("./router.js")(app);
+require("./api/router.js")(app);
 
-// Catch All Route
 app.all("*", (req, res) => {
 	res.status(404).send("404 - Not Found");
 });

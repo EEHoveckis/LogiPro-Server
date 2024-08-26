@@ -18,7 +18,8 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 				description: "Select Server Port. (3000):".cyan.bold,
 				pattern: /^([1-9][0-9]{0,3}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-5])$/,
 				message: "Port Must Be A Number From 1 - 65535!".yellow.bold,
-				required: false
+				required: false,
+				default: 3000
 			},
 			databaseType: {
 				description: "Server Database Type. (CLOUD / LOCAL):".cyan.bold,

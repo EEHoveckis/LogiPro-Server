@@ -1,6 +1,6 @@
 const { existsSync, writeFileSync } = require("fs");
 const router = require('express').Router();
-const auth = require("../helperFuncs/authentification/auth.js");
+const auth = require("../../helperFuncs/authentification/auth.js");
 
 router.get("/", (req, res) => {
 	const authReturn = auth(req);

@@ -2,7 +2,7 @@
 <h5 align="center">RESTful API Server For LogiPro</h5>
 
 ## 📝 Description
-_**LogiPro is currently under development, more news will follow.**_
+_**LogiPro is still in early development, more news will follow.**_
 
 LogiPro is an all-in-one solution for logistics, warehousing, and bookkeeping. Simplify inventory management, track orders in real-time, and automate your financial records with ease. With its user-friendly interface and powerful features, LogiPro helps you streamline operations, reduce costs, and improve overall efficiency, whether you're managing a small or large-scale business.
 
