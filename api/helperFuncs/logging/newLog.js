@@ -5,8 +5,14 @@ module.exports = function(req) {
 		addLog(req, "Logged In!");
 	} else if (req.baseUrl == "/api/logout") { // Logout
 		addLog(req, "Logged Out!");
-	} else {
-		// Nothing here for now...
+	} else if (req.baseUrl == "/api/getuser") { // Get User Info
+		addLog(req, `Requested User Info - ${req.query.username}`);
+	} else if (req.baseUrl == "/api/newuser") { // New User
+		addLog(req, `Added New User - ${req.query.newusername}`);
+	} else if (req.baseUrl == "/api/edituser") { // Edit User
+		addLog(req, `Edited User Info - ${req.query.username}`);
+	} else if (req.baseUrl == "/api/deleteuser") { // Delete User
+		addLog(req, `Requested User Deletion - ${req.query.username}`);
 	}
 
 	function addLog(req, message) {
