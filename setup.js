@@ -63,6 +63,7 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 		}
 		mkdirSync("./data");
 		mkdirSync("./data/users");
+		mkdirSync("./data/logs");
 		writeFileSync("./data/options.json", JSON.stringify(options));
 
 		let uniqueSalt = randomBytes(16).toString("hex");

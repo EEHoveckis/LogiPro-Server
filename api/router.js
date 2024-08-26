@@ -14,5 +14,12 @@ module.exports = function(app) {
 	app.use("/api/edituser", require("./routes/users/editUser.js"));
 	app.use("/api/deleteuser", require("./routes/users/deleteUser.js"));
 
-	// Something else...
+	// Orders
+	app.use("/api/orders", require("./routes/orders/orders.js"));
+
+	// Warehouses
+	app.use("/api/warehouse", require("./routes/warehouses/warehouse.js"));
+
+	// Logs
+	app.use("/api/logs", require("./routes/logging/logs.js"));
 }
