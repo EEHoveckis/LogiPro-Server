@@ -4,9 +4,9 @@ const auth = require("../../helperFuncs/authentification/auth.js");
 const newLog = require("../../helperFuncs/logging/newLog.js");
 
 router.get("/", (req, res) => {
-	if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("User Does Not Exist!");
-	const authReturn = auth(req);
+	const authReturn = auth(req, "USERS");
 	if (authReturn == 200) {
+		if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("User Does Not Exist!");
 		newLog(req);
 		res.status(200).json(require(`${process.cwd()}/data/users/${req.query.username}.json`));
 	} else {

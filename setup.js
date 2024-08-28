@@ -63,6 +63,9 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 		}
 		mkdirSync("./data");
 		mkdirSync("./data/users");
+		mkdirSync("./data/companies");
+		mkdirSync("./data/orders");
+		mkdirSync("./data/warehouses");
 		mkdirSync("./data/logs");
 		writeFileSync("./data/options.json", JSON.stringify(options));
 

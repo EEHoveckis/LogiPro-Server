@@ -8,7 +8,7 @@ const { randomBytes } = require('crypto');
 const { existsSync, writeFileSync } = require("fs");
 
 router.get("/", (req, res) => {
-	const authReturn = auth(req);
+	const authReturn = auth(req, "LOGIN");
 	if (authReturn == 200) {
 		const authData = require(`${process.cwd()}/data/users/${req.headers.username}.json`);
 		authData.online = true;

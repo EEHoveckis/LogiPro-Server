@@ -16,9 +16,26 @@ LogiPro is an all-in-one solution for logistics, warehousing, and bookkeeping. S
 ## 📕 Usage
 To use LogiPro, please download the official **LogiPro Client** (_Not yet available_). If you prefer, you can create your own software, but please note that no warranty or support is provided for custom implementations. For a reliable and supported experience, using the LogiPro Client is recommended.
 
-## 📰 Notes
-Nothing here for now :)
+## 📰 Todo
+- [ ] **Authentification**
+  - [ ] Proper Token System
+  - [x] Login History, To See All Logins
+  - [ ] Proper Permissions System
+- [ ] **Clients System**
+  - [ ] List Active / Inactive Orders
+  - [ ] Order Tracking
+  - [ ] Payments / Contracts
+- [ ] **Warehouse System**
+  - [ ] Item Search Location
+  - [ ] Inventory By Item / Full Inventory
+  - [ ] Scanner Support
+  - [ ] Prices, Suppliers, etc.
+- [ ] **Logs System**
+  - [ ] Order Logs / Logs
+  - [ ] User Actions / Logs
+  - [ ] Warehouse Actions / Logs
 
+_List can change at any time, with new features, or some features removed or altered._
 ## 👨‍⚖️ License
 [**LogiPro Server**](https://github.com/EEHoveckis/LogiPro) by [**EEHoveckis**](https://github.com/EEHoveckis) is licensed under a [**Creative Commons Attribution 4.0 International License**](https://creativecommons.org/licenses/by/4.0/).\
 Permissions beyond the scope of this license may be available on request.\
