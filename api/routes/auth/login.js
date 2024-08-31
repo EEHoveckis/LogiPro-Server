@@ -1,5 +1,3 @@
-// Login user
-
 const router = require('express').Router();
 const auth = require("../../helperFuncs/authentification/auth.js");
 const newLog = require("../../helperFuncs/logging/newLog.js");
@@ -7,12 +5,17 @@ const newLog = require("../../helperFuncs/logging/newLog.js");
 const { randomBytes } = require('crypto');
 const { existsSync, writeFileSync } = require("fs");
 
+const options = {
+	name: "login",
+	required: ["username", "password"]
+};
+
 router.get("/", (req, res) => {
-	const authReturn = auth(req, "LOGIN");
+	const authReturn = auth(req, options);
 	if (authReturn == 200) {
 		const authData = require(`${process.cwd()}/data/users/${req.headers.username}.json`);
 		authData.online = true;
-		authData.tempToken = randomBytes(8).toString("hex");
+		authData.temptoken = randomBytes(8).toString("hex");
 		authData.tokenValidTill = `${Date.now() + 1 * 60 * 60 * 1000}`;
 		authData.lastLogin = `${Date.now()}`;
 		authData.loginHistory.push(Date.now());

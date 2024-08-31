@@ -79,7 +79,7 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 			wrongPassword: 0,
 			group: "ADMIN",
 			online: false,
-			tempToken: "",
+			temptoken: "",
 			tokenValidTill: "",
 			lastLogin: "",
 			loginHistory: [],

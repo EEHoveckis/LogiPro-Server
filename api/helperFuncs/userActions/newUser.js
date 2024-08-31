@@ -14,7 +14,7 @@ module.exports = function(req) {
 		wrongPassword: 0,
 		online: false,
 		group: req.query.newgroup,
-		tempToken: "",
+		temptoken: "",
 		tokenValidTill: "",
 		lastLogin: "",
 		loginHistory: [],

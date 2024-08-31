@@ -14,7 +14,7 @@ module.exports = function(req) {
 		uniqueSalt: oldUserObject.uniqueSalt,
 		wrongPassword: oldUserObject.wrongPassword,
 		group: (req.query.newgroup === undefined) ? oldUserObject.group : req.query.newgroup,
-		tempToken: oldUserObject.tempToken,
+		temptoken: oldUserObject.tempToken,
 		tokenValidTill: oldUserObject.tokenValidTill,
 		lastLogin: oldUserObject.lastLogin,
 		status: "OK"
