@@ -5,12 +5,15 @@ const newLog = require("../../helperFuncs/logging/newLog.js");
 const { randomBytes } = require('crypto');
 const { existsSync, writeFileSync } = require("fs");
 
-const options = {
-	name: "login",
-	required: ["username", "password"]
-};
-
 router.get("/", (req, res) => {
+	const options = {
+		name: "login",
+		username: req.headers.username,
+		userLog: "Logged In!",
+		serverLog: `${req.headers.username} Logged In!`,
+		required: ["username", "password"]
+	};
+
 	const authReturn = auth(req, options);
 	if (authReturn == 200) {
 		const authData = require(`${process.cwd()}/data/users/${req.headers.username}.json`);
@@ -20,7 +23,7 @@ router.get("/", (req, res) => {
 		authData.lastLogin = `${Date.now()}`;
 		authData.loginHistory.push(Date.now());
 
-		newLog(req);
+		newLog(options);
 		writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(authData));
 
 		return res.status(200).json(authData);

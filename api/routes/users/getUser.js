@@ -10,10 +10,19 @@ const options = {
 };
 
 router.get("/", (req, res) => {
+	const options = {
+		name: "getUser",
+		username: req.headers.username,
+		userLog: `Requested Info For ${req.query.username}`,
+		serverLog: `${req.headers.username} Requested Info For ${req.query.username}`,
+		required: ["username", "temptoken", "queryUsername"],
+		permissions: "ADMIN"
+	};
+
 	const authReturn = auth(req, options);
 	if (authReturn == 200) {
 		if (!existsSync(`${process.cwd()}/data/users/${req.query.username}.json`)) return res.status(500).send("User Does Not Exist!");
-		newLog(req);
+		newLog(options);
 		res.status(200).json(require(`${process.cwd()}/data/users/${req.query.username}.json`));
 	} else {
 		res.status(authReturn[0]).send(authReturn[1]);

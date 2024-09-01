@@ -1,25 +1,23 @@
-const { scryptSync, randomBytes } = require('crypto');
+const { scryptSync } = require('crypto');
 const { existsSync, writeFileSync } = require("fs");
 const renewToken = require("./renewToken.js");
 
 module.exports = function(req, options) {
-	if (!existsSync(`${process.cwd()}/data/users/${req.headers.username}.json`)) return [401, "401 - Incorrect Username!"]; // User Does Not Exist
+	if (!existsSync(`${process.cwd()}/data/users/${req.headers.username}.json`)) return [401, "401 - Incorrect Username!"];
 	const loginData = require(`${process.cwd()}/data/users/${req.headers.username}.json`);
 
-	if (loginData.status == "DELETED") return [403, "403 - This Account Is Marked For Deletion!"]; // User Account Marked For Deletion
-	if (loginData.status == "BLOCKED") return [403, "403 - This Account Is Currently Blocked! Contact Administrator!"]; // User Inputted Wrong Password Too Many Times And Is Blocked
+	if (loginData.status == "DELETED") return [403, "403 - This Account Is Marked For Deletion!"];
+	if (loginData.status == "BLOCKED") return [403, "403 - This Account Is Currently Blocked! Contact Administrator!"];
 
-	console.log(options)
 	if (options.required.includes("password") && req.headers.password == undefined) return [403, "403 - Missing Password!"];
 	if (options.required.includes("password") && scryptSync(req.headers.password, loginData.uniqueSalt, 64).toString("hex") != loginData.password) {
 		if (loginData.wrongPassword <= 2) {
 			loginData.wrongPassword += 1;
-			writeFileSync(`./data/users/${req.headers.username}.json`, JSON.stringify(loginData));
+			writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(loginData));
 			return [403, `403 - Incorrect Password! ${3 - loginData.wrongPassword} Tries Left!`];
-		} else
-		if (loginData.wrongPassword == 3) {
+		} else if (loginData.wrongPassword == 3) {
 			loginData.status = "BLOCKED";
-			writeFileSync(`./data/users/${req.headers.username}.json`, JSON.stringify(loginData));
+			writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(loginData));
 			return [403, "403 - Incorrect Password! Your Account Has Been Blocked! Contact Administrator!"];
 		}
 	}

@@ -4,12 +4,15 @@ const newLog = require("../../helperFuncs/logging/newLog.js");
 
 const { existsSync, writeFileSync } = require("fs");
 
-const options = {
-	name: "logout",
-	required: ["username", "temptoken"]
-};
-
 router.get("/", (req, res) => {
+	const options = {
+		name: "logout",
+		username: req.headers.username,
+		userLog: "Logged In!",
+		serverLog: `${req.headers.username} Logged In!`,
+		required: ["username", "temptoken"]
+	};
+
 	const authReturn = auth(req, options);
 	if (authReturn == 200) {
 		const authData = require(`${process.cwd()}/data/users/${req.headers.username}.json`);
