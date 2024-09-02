@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
 
 		return res.status(200).send(authData);
 	} else {
-		res.status(authReturn[0]).send(authReturn[1]);
+		return res.status(authReturn[0]).send(authReturn[1]);
 	}
 });
 

@@ -23,7 +23,7 @@ router.post("/", (req, res) => {
 		serverLog(options);
 		res.status(200).json(newUser(req));
 	} else {
-		res.status(authReturn[0]).send(authReturn[1]);
+		return res.status(authReturn[0]).send(authReturn[1]);
 	}
 });
 

@@ -24,7 +24,7 @@ router.delete("/", (req, res) => {
 		serverLog(options);
 		return res.status(200).send(deleteUser(req));
 	} else {
-		res.status(authReturn[0]).send(authReturn[1]);
+		return res.status(authReturn[0]).send(authReturn[1]);
 	}
 });
 

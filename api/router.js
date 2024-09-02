@@ -21,5 +21,5 @@ module.exports = function(app) {
 	app.use("/api/warehouse", require("./routes/warehouses/warehouse.js"));
 
 	// Logs
-	app.use("/api/getlogs", require("./routes/logging/getLogs.js"));
+	app.use("/api/getuserlogs", require("./routes/logging/getUserLogs.js"));
 }
