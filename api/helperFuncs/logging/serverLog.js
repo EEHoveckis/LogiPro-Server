@@ -9,7 +9,7 @@ module.exports = function(options) {
 
 		writeFileSync(`${process.cwd()}/data/logs/serverLogs.json`, JSON.stringify(serverLogs));
 	} else {
-		const userLogs = {
+		const serverLogs = {
         [Date.now()]: options.serverLog
 		};
 		writeFileSync(`${process.cwd()}/data/logs/serverLogs.json`, JSON.stringify(serverLogs));
