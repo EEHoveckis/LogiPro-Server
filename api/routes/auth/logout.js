@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const auth = require("../../helperFuncs/authentification/auth.js");
-const newLog = require("../../helperFuncs/logging/newLog.js");
+const userLog = require("../../helperFuncs/logging/userLog.js");
+const serverLog = require("../../helperFuncs/logging/serverLog.js");
 
 const { existsSync, writeFileSync } = require("fs");
 
@@ -9,7 +10,7 @@ router.get("/", (req, res) => {
 		name: "logout",
 		username: req.headers.username,
 		userLog: "Logged In!",
-		serverLog: `${req.headers.username} Logged In!`,
+		serverLog: `${req.headers.username} Logged Out!`,
 		required: ["username", "temptoken"]
 	};
 
@@ -21,7 +22,8 @@ router.get("/", (req, res) => {
 		authData.tokenValidTill = "";
 		authData.lastLogin = "";
 
-		newLog(req);
+		userLog(options);
+		serverLog(options);
 		writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(authData));
 
 		return res.status(200).send(authData);

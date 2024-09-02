@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const auth = require("../../helperFuncs/authentification/auth.js");
-const newLog = require("../../helperFuncs/logging/newLog.js");
+const userLog = require("../../helperFuncs/logging/userLog.js");
+const serverLog = require("../../helperFuncs/logging/serverLog.js");
 
 const { randomBytes } = require('crypto');
 const { existsSync, writeFileSync } = require("fs");
@@ -23,7 +24,8 @@ router.get("/", (req, res) => {
 		authData.lastLogin = `${Date.now()}`;
 		authData.loginHistory.push(Date.now());
 
-		newLog(options);
+		userLog(options);
+		serverLog(options);
 		writeFileSync(`${process.cwd()}/data/users/${req.headers.username}.json`, JSON.stringify(authData));
 
 		return res.status(200).json(authData);
