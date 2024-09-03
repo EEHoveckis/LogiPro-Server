@@ -22,4 +22,5 @@ module.exports = function(app) {
 
 	// Logs
 	app.use("/api/getuserlogs", require("./routes/logging/getUserLogs.js"));
+	app.use("/api/getserverlogs", require("./routes/logging/getserverlogs.js"));
 }
