@@ -1,5 +1,3 @@
-// Function For User Info Editing
-
 const { scryptSync, randomBytes } = require('crypto');
 const { writeFileSync, rename } = require("fs");
 
@@ -13,7 +11,7 @@ module.exports = function(req) {
 		password: (req.query.newpassword === undefined) ? oldUserObject.password : scryptSync(req.query.newpassword, oldUserObject.uniqueSalt, 64).toString("hex"),
 		uniqueSalt: oldUserObject.uniqueSalt,
 		wrongPassword: oldUserObject.wrongPassword,
-		group: (req.query.newgroup === undefined) ? oldUserObject.group : req.query.newgroup,
+		permissions: (req.query.newpermissions === undefined) ? oldUserObject.permissions : req.query.newpermissions,
 		temptoken: oldUserObject.tempToken,
 		tokenValidTill: oldUserObject.tokenValidTill,
 		lastLogin: oldUserObject.lastLogin,

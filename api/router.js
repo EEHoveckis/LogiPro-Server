@@ -18,7 +18,8 @@ module.exports = function(app) {
 	app.use("/api/orders", require("./routes/orders/orders.js"));
 
 	// Warehouses
-	app.use("/api/warehouse", require("./routes/warehouses/warehouse.js"));
+	app.use("/api/newwarehouse", require("./routes/warehouses/newWarehouse.js"));
+	app.use("/api/deletewarehouse", require("./routes/warehouses/deleteWarehouse.js"));
 
 	// Logs
 	app.use("/api/getuserlogs", require("./routes/logging/getUserLogs.js"));

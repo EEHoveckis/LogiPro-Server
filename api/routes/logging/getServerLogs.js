@@ -7,17 +7,15 @@ const serverLog = require("../../helperFuncs/logging/serverLog.js");
 
 router.get("/", (req, res) => {
 	const options = {
-		name: "getServerLogs",
-		username: req.headers.username,
 		userLog: `Requested Server Logs`,
 		serverLog: `${req.headers.username} Requested Server Logs`,
 		required: ["username", "temptoken"],
-		permissions: "ADMIN"
+		permissions: "getServerLogs"
 	};
 
 	const authReturn = auth(req, options);
 	if (authReturn == 200) {
-		if (!existsSync(`${process.cwd()}/data/logs/serverLogs.json`)) return res.status(500).send("500 - Logs Do Not Exist");
+		if (!existsSync(`${process.cwd()}/data/logs/serverLogs.json`)) return res.status(404).send("404 - Logs Do Not Exist");
 		const serverLogs = require(`${process.cwd()}/data/logs/serverLogs.json`);
 		userLog(options);
 		serverLog(options);

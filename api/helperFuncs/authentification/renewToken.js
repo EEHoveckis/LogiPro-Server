@@ -1,5 +1,3 @@
-// Renews user token for 1h if any action is done.
-
 const { writeFileSync } = require("fs");
 
 module.exports = function(req) {

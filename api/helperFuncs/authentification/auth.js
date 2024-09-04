@@ -26,9 +26,8 @@ module.exports = function(req, options) {
 	if (options.required.includes("temptoken") && req.headers.temptoken != loginData.temptoken) return [403, "403 - Incorrect Temporary Token!"];
 	if (options.required.includes("temptoken") && loginData.tokenValidTill < Date.now()) return [403, "Temporary Token Expired!"];
 
-	if (options.permissions && options.permissions != loginData.group) return [403, "Not Authorized To View Content"];
+	if (options.permissions)
+		if (!loginData.permissions.includes(options.permissions) && !loginData.permissions.includes("ADMIN")) return [403, "Action Not Authorized!"];
 	renewToken(req);
 	return 200;
 };
-
-// FUTURE! This needs to be able to look up neccesary parameters, permissions and other stuff.

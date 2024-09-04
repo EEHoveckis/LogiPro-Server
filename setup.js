@@ -77,7 +77,7 @@ if (existsSync(`${process.cwd()}/data/options.json`)) {
 			password: scryptSync(result.password, uniqueSalt, 64).toString("hex"),
 			uniqueSalt: uniqueSalt,
 			wrongPassword: 0,
-			group: "ADMIN",
+			permissions: ["ADMIN"],
 			online: false,
 			temptoken: "",
 			tokenValidTill: "",

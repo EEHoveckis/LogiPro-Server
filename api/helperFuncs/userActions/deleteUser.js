@@ -1,5 +1,3 @@
-// Function For Marking User For Deletion
-
 const { writeFileSync } = require("fs");
 
 module.exports = function(req) {
