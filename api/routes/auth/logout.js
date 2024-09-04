@@ -7,6 +7,7 @@ const { existsSync, writeFileSync } = require("fs");
 
 router.get("/", (req, res) => {
 	const options = {
+		username: req.headers.username,
 		userLog: "Logged In!",
 		serverLog: `${req.headers.username} Logged Out!`,
 		required: ["username", "temptoken"]

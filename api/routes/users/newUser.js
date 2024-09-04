@@ -7,8 +7,9 @@ const serverLog = require("../../helperFuncs/logging/serverLog.js");
 
 router.post("/", (req, res) => {
 	const options = {
-		userLog: `Created New User - ${req.query.newusername}`,
-		serverLog: `${req.headers.username} Created New User - ${req.query.newusername}`,
+		username: req.headers.username,
+		userLog: `Created New User - ${req.query.username}`,
+		serverLog: `${req.headers.username} Created New User - ${req.query.username}`,
 		required: ["username", "temptoken", "queryUsername"],
 		permissions: "createUsers"
 	};

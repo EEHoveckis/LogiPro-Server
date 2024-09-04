@@ -6,6 +6,7 @@ const serverLog = require("../../helperFuncs/logging/serverLog.js");
 
 router.get("/", (req, res) => {
 	const options = {
+		username: req.headers.username,
 		userLog: `Requested Info For ${req.query.username}`,
 		serverLog: `${req.headers.username} Requested Info For ${req.query.username}`,
 		required: ["username", "temptoken", "queryUsername"],

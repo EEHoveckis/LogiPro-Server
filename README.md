@@ -19,21 +19,24 @@ To use LogiPro, please download the official **LogiPro Client** (_Not yet availa
 ## 📰 Todo
 - [ ] **Authentification**
   - [ ] Proper Token System
-  - [x] Login History, To See All Logins
-  - [ ] Proper Permissions System
+  - [ ] Login History, To See All Logins
+  - [x] Proper Permissions System
 - [ ] **Clients System**
   - [ ] List Active / Inactive Orders
-  - [ ] Order Tracking
+  - [ ] Order Tracking / Processing
+  - [ ] Customer Notifications
   - [ ] Payments / Contracts
 - [ ] **Warehouse System**
   - [ ] Item Search Location
-  - [ ] Inventory By Item / Full Inventory
-  - [ ] Scanner Support
+  - [ ] Inventory By Item / Full Audit
+  - [ ] Batch & Expiry Management
+  - [ ] Stock Alerts
+  - [ ] Barcode Scanner Support
   - [ ] Prices, Suppliers, etc.
-- [ ] **Logs System**
-  - [ ] Order Logs / Logs
-  - [ ] User Actions / Logs
-  - [ ] Warehouse Actions / Logs
+  - [ ] Task Assignment
+- [x] **Logs System**
+  - [x] Display All Logs For User / Server
+  - [x] Search Logs For Specific Time Period
 
 _List can change at any time, with new features, or some features removed or altered._
 ## 👨‍⚖️ License

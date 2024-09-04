@@ -7,6 +7,7 @@ const serverLog = require("../../helperFuncs/logging/serverLog.js");
 
 router.put("/", (req, res) => {
 	const options = {
+		username: req.headers.username,
 		userLog: `Edited User - ${req.query.username}`,
 		serverLog: `${req.headers.username} Edited Info For User ${req.query.username}`,
 		required: ["username", "temptoken", "queryUsername"],

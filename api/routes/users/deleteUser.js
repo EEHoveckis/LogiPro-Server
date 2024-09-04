@@ -7,6 +7,7 @@ const serverLog = require("../../helperFuncs/logging/serverLog.js");
 
 router.delete("/", (req, res) => {
 	const options = {
+		username: req.headers.username,
 		userLog: `Marked User For Deletion - ${req.query.username}`,
 		serverLog: `${req.headers.username} Marked User ${req.query.username} For Deletion`,
 		required: ["username", "temptoken", "queryUsername"],
