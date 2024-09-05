@@ -19,7 +19,7 @@ To use LogiPro, please download the official **LogiPro Client** (_Not yet availa
 ## 📰 Todo
 - [ ] **Authentification**
   - [ ] Proper Token System
-  - [ ] Login History, To See All Logins
+  - [x] Login History, To See All Logins
   - [x] Proper Permissions System
 - [ ] **Clients System**
   - [ ] List Active / Inactive Orders

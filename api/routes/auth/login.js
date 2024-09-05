@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 		authData.temptoken = randomBytes(8).toString("hex");
 		authData.tokenValidTill = `${Date.now() + 1 * 60 * 60 * 1000}`;
 		authData.lastLogin = `${Date.now()}`;
-		authData.loginHistory.push(Date.now());
+		authData.loginHistory.push(`${Date.now()}`);
 
 		userLog(options);
 		serverLog(options);
