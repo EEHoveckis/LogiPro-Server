@@ -16,11 +16,11 @@ router.post("/", (req, res) => {
 	const authReturn = auth(req, options);
 	if (authReturn == 200) {
 		if (existsSync(`${process.cwd()}/data/warehouses/${req.query.warehouse}.json`)) return res.status(500).send("500 - Warehouse Already Exists");
-		if (req.query.warehouse == undefined) return res.status(500).send("500 - Some Parameters Not Supplied");
+		if (req.query.warehouse == undefined) return res.status(500).send("500 - Warehouse Name Not Supplied!");
 		userLog(options);
 		serverLog(options);
 		writeFileSync(`${process.cwd()}/data/warehouses/${req.query.warehouse}.json`, JSON.stringify({}));
-		return res.status(200).send("Warehouse Created");
+		return res.status(200).send("Warehouse Created!");
 	} else {
 		return res.status(authReturn[0]).send(authReturn[1]);
 	}
