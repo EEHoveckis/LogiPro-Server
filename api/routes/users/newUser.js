@@ -10,8 +10,8 @@ router.post("/", (req, res) => {
 		username: req.headers.username,
 		userLog: `Created New User - ${req.query.username}`,
 		serverLog: `${req.headers.username} Created New User - ${req.query.username}`,
-		required: ["username", "temptoken", "queryUsername"],
-		permissions: "createUsers"
+		required: ["username", "temptoken", "userData"],
+		permissions: "newUser"
 	};
 
 	const authReturn = auth(req, options);

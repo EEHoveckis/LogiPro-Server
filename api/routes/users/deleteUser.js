@@ -11,7 +11,7 @@ router.delete("/", (req, res) => {
 		userLog: `Marked User For Deletion - ${req.query.username}`,
 		serverLog: `${req.headers.username} Marked User ${req.query.username} For Deletion`,
 		required: ["username", "temptoken", "queryUsername"],
-		permissions: "deleteUsers",
+		permissions: "deleteUser",
 		specialRules: "noDeleteSelf"
 	};
 

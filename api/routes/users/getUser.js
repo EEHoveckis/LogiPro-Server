@@ -10,7 +10,7 @@ router.get("/", (req, res) => {
 		userLog: `Requested Info For ${req.query.username}`,
 		serverLog: `${req.headers.username} Requested Info For ${req.query.username}`,
 		required: ["username", "temptoken", "queryUsername"],
-		permissions: "seeUsers"
+		permissions: "getUser"
 	};
 
 	const authReturn = auth(req, options);

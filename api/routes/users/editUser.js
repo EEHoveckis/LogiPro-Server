@@ -11,7 +11,7 @@ router.put("/", (req, res) => {
 		userLog: `Edited User - ${req.query.username}`,
 		serverLog: `${req.headers.username} Edited Info For User ${req.query.username}`,
 		required: ["username", "temptoken", "queryUsername"],
-		permissions: "editUsers"
+		permissions: "editUser"
 	};
 
 	const authReturn = auth(req, options);
