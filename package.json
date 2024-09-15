@@ -1,6 +1,6 @@
 {
 	"name": "logipro-server",
-	"version": "0.0.40",
+	"version": "0.0.41",
 	"description": "RESTful API Server for LogiPro",
 	"main": "index.js",
 	"scripts": {
@@ -23,6 +23,7 @@
 	"dependencies": {
 		"cors": "^2.8.5",
 		"express": "^4.19.2",
-		"jsonwebtoken": "^9.0.2"
+		"jsonwebtoken": "^9.0.2",
+		"mongodb": "^6.9.0"
 	}
 }

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
-const accessKey = require("../../../data/options.json").accessKey;
-const refreshKey = require("../../../data/options.json").refreshKey;
+const { accessKey } = require("../../../data/options.json");
+const { refreshKey } = require("../../../data/options.json");
 
 module.exports.genTokens = function(req, res, username) {
 	try {
@@ -12,7 +12,7 @@ module.exports.genTokens = function(req, res, username) {
 	}
 };
 
-module.exports.verify = function(req, res, next) {
+module.exports.verifyToken = function(req, res, next) {
 	const token = req.header("Authorization");
 	if (!token) return res.status(401).send("401 - Not Authenticated");
 	try {

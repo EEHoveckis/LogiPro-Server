@@ -10,7 +10,7 @@ module.exports.hash = async function(password) {
 	});
 };
 
-module.exports.verify = async function(receivedPass, userPass) {
+module.exports.verifyPassword = async function(receivedPass, userPass) {
 	return new Promise((resolve, reject) => {
 		const [salt, key] = userPass.split(":");
 		scrypt(receivedPass, salt, 64, (err, derivedKey) => {
