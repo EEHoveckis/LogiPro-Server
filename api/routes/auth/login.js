@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { existsSync } = require("fs");
-const { verifyPassword } = require("../../helperFuncs/auth/passwords.js");
-const { genTokens } = require("../../helperFuncs/auth/tokens.js");
+const { verifyPassword } = require("../../utils/auth/passwords.js");
+const { genTokens } = require("../../utils/auth/tokens.js");
 
 module.exports = router.post("/", async (req, res) => {
 	try {

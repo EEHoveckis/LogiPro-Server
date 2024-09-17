@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { verifyToken } = require("../../helperFuncs/auth/tokens.js");
+const { verifyToken } = require("../../utils/auth/tokens.js");
 
 //const { existsSync, writeFileSync } = require("fs");
 

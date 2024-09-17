@@ -7,4 +7,4 @@ module.exports = function(app) {
 	// Login / Logout
 	app.use("/api/login", require("./routes/auth/login.js"));
 	app.use("/api/logout", require("./routes/auth/logout.js"));
-}
+};
