@@ -1,12 +1,12 @@
 const router = require("express").Router();
-const { existsSync } = require("fs");
+const getUser = require("../../utils/mongo/getUser.js");
 const { verifyPassword } = require("../../utils/auth/passwords.js");
 const { genTokens } = require("../../utils/auth/tokens.js");
 
 module.exports = router.post("/", async (req, res) => {
 	try {
-		if (!existsSync(`${process.cwd()}/data/users/${req.body.username}.json`)) return res.status(401).send("401 - Incorrect Username!");
-		const userData = require(`${process.cwd()}/data/users/${req.body.username}.json`);
+		const userData = await getUser(req.body.username);
+		if (!userData) return res.status(401).send("401 - Incorrect Username!");
 		if (!await verifyPassword(req.body.password, userData.password)) return res.status(401).send("401 - Incorrect Password!");
 		genTokens(req, res, req.body.username);
 	} catch (err) {

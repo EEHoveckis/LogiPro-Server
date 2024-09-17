@@ -11,7 +11,7 @@ const client = new MongoClient(mongoURI, {
 module.exports = async function() {
 	try {
 		await client.connect();
-		await client.db("testing").command({ ping: 1 });
+		await client.db("master").command({ ping: 1 });
 		console.log("Connected To MongoDB!");
 		return client;
 	} catch (err) {
