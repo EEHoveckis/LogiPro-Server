@@ -1,25 +1,46 @@
 const jwt = require("jsonwebtoken");
-const { accessKey } = require("../../../data/options.json");
-const { refreshKey } = require("../../../data/options.json");
+const { accessKey, refreshKey } = require("../../../data/options.json");
+const { deleteTokens, postTokens, refreshTokens } = require("../mongo/tokenActions.js");
 
 module.exports.genTokens = function(req, res, username) {
 	try {
-		const accessToken = jwt.sign({ username: username }, accessKey, { expiresIn: "30m" });
+		const accessToken = jwt.sign({ username: username }, accessKey, { expiresIn: "1m" });
 		const refreshToken = jwt.sign({ username: username }, refreshKey, { expiresIn: "7d" }); // TODO: Make this usable
+		postTokens(username, accessToken, refreshToken);
 		return res.status(200).json({ accessToken: accessToken, refreshToken: refreshToken });
 	} catch (err) {
-		res.status(500).send("500 - Something Went Wrong!");
+		return res.status(500).send("500 - Something Went Wrong!");
 	}
 };
 
-module.exports.verifyToken = function(req, res, next) {
-	const token = req.header("Authorization");
-	if (!token) return res.status(401).send("401 - Not Authenticated");
+// TODO: Implement refresh token too
+/* F this for now
+module.exports.verifyTokens = function(req, res, next) {
+	const tokens = req.header("Authorization").split("|");
+	if (!tokens) return res.status(401).send("401 - Not Authenticated");
 	try {
-		const decoded = jwt.verify(token, accessKey);
+		const accessToken = jwt.verify(tokens[0], accessKey);
 		next();
 	} catch (err) {
-		console.log(err);
-		res.status(401).send("401 - Invalid Token");
+		if (err.name == "TokenExpiredError") {
+			module.exports.refreshTokens(req, res, tokens)
+		}
 	}
+};
+*/
+
+module.exports.verifyAndDeleteTokens = function(req, res, next) {
+	const token = req.header("accesstoken");
+	if (!token) return res.status(401).send("401 - Not Authenticated");
+	try {
+		const accessToken = jwt.verify(token, accessKey);
+		deleteTokens(accessToken.username);
+	} catch (err) {
+		return res.status(401).send("401 - Invalid Token");
+	}
+	next();
+};
+
+module.exports.refreshTokens = function(req, res, tokens) {
+	const refreshToken = jwt.verify(tokens[1], refreshKey);
 };
