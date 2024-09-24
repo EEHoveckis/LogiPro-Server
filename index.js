@@ -20,7 +20,7 @@ const PORT = require("./data/options.json").port;
 
 	app.listen(PORT, () => console.log(`Server Listening On Port ${PORT}`));
 
-	process.on('SIGINT', async () => {
+	process.on("SIGINT", async () => {
 		console.log("Server Shutting Down\nClosing MongoDB connection...");
 		await client.close();
 		process.exit(0);
