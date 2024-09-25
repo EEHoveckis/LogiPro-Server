@@ -14,13 +14,13 @@ LogiPro is an all-in-one solution for logistics, warehousing, and bookkeeping. S
 4. Follow setup instructions and input your preferences.
 
 ## 📕 Usage
-To use LogiPro, please download the official **LogiPro Client** (_Not yet available_). If you prefer, you can create your own software, but please note that no warranty or support is provided for custom implementations. For a reliable and supported experience, using the LogiPro Client is recommended.
+To use LogiPro, please download the official **LogiPro Client** (_Not yet available_). If you prefer, you can use your own software, but please note that no warranty or support is provided for custom implementations. For a reliable and supported experience, using the LogiPro Client is recommended.
 
 ## 📰 Todo
 - [ ] **Authentification**
-  - [ ] Proper Token System
+  - [x] Proper Token System
   - [ ] Login History, To See All Logins
-  - [ ] Proper Permissions System
+  - [x] Proper Permissions System
 - [ ] **Clients System**
   - [ ] List Active / Inactive Orders
   - [ ] Order Tracking / Processing
