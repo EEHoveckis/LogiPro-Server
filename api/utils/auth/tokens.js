@@ -10,31 +10,32 @@ module.exports.genTokens = function(req, res, username) {
 		postTokens(username, accessToken, refreshToken);
 		return res.status(200).json({ accessToken, refreshToken });
 	} catch (err) {
-		return res.status(500).send("500 - Something Went Wrong!");
+		return res.status(500).json({ errorCode: "unknownError" });
 	}
 };
 
 // Checks Access Token
 module.exports.verifyAccess = function(req, res, next) {
 	const token = req.header("Authorization");
-	if (!token) return res.status(401).send("401 - Not Authenticated!");
+	if (!token) return res.status(401).json({ errorCode: "noAccessToken" });
 	try {
 		const accessToken = jwt.verify(token, accessKey);
 		next();
 	} catch (err) {
-		if (err.name == "TokenExpiredError") return res.status(403).send("403 - Token Expired!");
-		else return res.status(401).send("401 - Invalid Token!");
+		if (err.name == "TokenExpiredError") return res.status(403).json({ errorCode: "accessTokenExpired" });
+		else return res.status(401).json({ errorCode: "invalidAccessToken" });
 	}
 };
 
 // Checks Refresh Token
 module.exports.verifyRefresh = function(req, res, next) {
 	const token = req.header("Authorization");
-	if (!token) return res.status(401).send("401 - Not Authenticated!");
+	if (!token) return res.status(401).json({ errorCode: "noRefreshToken" });
 	try {
 		const refreshToken = jwt.verify(token, refreshKey);
 		next();
 	} catch (err) {
-		return res.status(403).send("403 - Refresh Token Invalid! Logging Out!");
+		if (err.name == "TokenExpiredError") return res.status(403).json({ errorCode: "refreshTokenExpired" });
+		return res.status(403).json({ errorCode: "invalidRefreshToken" });
 	}
 };

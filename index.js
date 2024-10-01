@@ -15,7 +15,7 @@ const PORT = require("./data/options.json").port;
 	require("./api/router.js")(app, client);
 
 	app.all("*", (req, res) => {
-		res.status(404).send("404 - Not Found");
+		res.status(404).json({ errorCode: "routeNotFound" });
 	});
 
 	app.listen(PORT, () => console.log(`Server Listening On Port ${PORT}`));
