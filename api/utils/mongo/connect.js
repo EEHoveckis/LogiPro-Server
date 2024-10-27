@@ -13,6 +13,11 @@ module.exports = async function() {
 		await client.connect();
 		await client.db("master").command({ ping: 1 });
 		console.log("Connected To MongoDB!");
+		await client.db("master").collection("serverLogs").updateOne({ username: "SERVER" }, {
+			$set: {
+				[Date.now()]: "init_Success"
+			}
+		});
 		return client;
 	} catch (err) {
 		console.log("Error Connecting To MongoDB!");
