@@ -1,6 +1,8 @@
 <h1 align="center">🏦 LogiPro Server 📚</h1>
 <h5 align="center">RESTful API Server For LogiPro</h5>
 
+**This repository is now archived. You are free to use anything from it.**
+
 ## 📝 Description
 _**LogiPro is still in early development, more news will follow.**_
 
